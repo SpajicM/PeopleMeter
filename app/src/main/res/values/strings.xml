@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PeopleMeter</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="peoplemeter">PeopleMeter</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last name</string>
+    <string name="address">Address</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="enter_the_code_you_ve_recieved_via_sms">Enter the code you\'ve received via SMS</string>
+    <string name="code_eg_6842">Code eg. 6842</string>
+    <string name="confirm">Confirm</string>
+    <string name="logo">Logo</string>
+    <string name="title_activity_channel_list">ChannelListActivity</string>
+    <string name="submit_comment">Submit comment</string>
+    <string name="leave_a_comment">Leave a comment about what you are watching</string>
+    <string name="type_a_comment">Type a comment…</string>
+</resources>

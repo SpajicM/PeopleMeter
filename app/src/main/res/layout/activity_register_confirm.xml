@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="50dp"
+    tools:context=".activities.MainActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_the_code_you_ve_recieved_via_sms"
+        android:layout_gravity="center"
+        android:textSize="18sp">
+    </TextView>
+    <EditText
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:maxLength="4"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:hint="@string/code_eg_6842"
+        android:inputType="number"
+        android:importantForAutofill="no">
+    </EditText>
+
+    <Button
+        android:id="@+id/button_register_confirm_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:layout_gravity="center">
+    </Button>
+</LinearLayout>
