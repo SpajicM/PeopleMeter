@@ -15,6 +15,7 @@
         android:textSize="18sp">
     </TextView>
     <EditText
+        android:id="@+id/editText_code"
         android:gravity="center"
         android:layout_gravity="center"
         android:maxLength="4"

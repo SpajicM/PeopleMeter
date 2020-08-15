@@ -1,6 +1,7 @@
 package hr.zavrsni.peoplemeter.utils.volley;
 
 import android.content.Context;
+import android.util.Base64;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,6 +23,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import hr.zavrsni.peoplemeter.utils.Auth;
 
 public class VolleyUtils {
 
@@ -35,8 +41,17 @@ public class VolleyUtils {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(method, path, toJson(jsonRequest),
                 listener, errorListener) {
             @Override
+            public Map<String, String> getHeaders() {
+                return buildAuthHeaders();
+            }
+
+            @Override
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 try {
+                    if (response.data.length == 0) {
+                        byte[] responseData = "{}".getBytes("UTF8");
+                        response = new NetworkResponse(responseData);
+                    }
                     String jsonString = new String(response.data,
                             HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
                     return Response.success(new JSONObject(jsonString),
@@ -53,6 +68,11 @@ public class VolleyUtils {
     public void requestArray(int method, String path, Object jsonRequest, Response.Listener<JSONArray> listener) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(method, path,null,
                 listener, errorListener) {
+            @Override
+            public Map<String, String> getHeaders() {
+                return buildAuthHeaders();
+            }
+
             @Override
             protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
                 try {
@@ -85,6 +105,17 @@ public class VolleyUtils {
         return jsonObject;
     }
 
+    private Map<String, String> buildAuthHeaders() {
+        if(!Auth.isLoggedIn())
+            return Collections.emptyMap();
+
+        HashMap<String, String> params = new HashMap<>();
+        String creds = String.format("%s:%s", Auth.getUser().getUsername(), Auth.getUser().getPassword());
+        String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+        params.put("Authorization", auth);
+        return params;
+    }
+
     private Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
@@ -103,6 +134,8 @@ public class VolleyUtils {
             } else if (error instanceof ParseError) {
                 // Indicates that the server response could not be parsed
                 Toast.makeText(mContext, "Response parsing error", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(mContext, "Error " + error.networkResponse.statusCode, Toast.LENGTH_LONG).show();
             }
         }
     };

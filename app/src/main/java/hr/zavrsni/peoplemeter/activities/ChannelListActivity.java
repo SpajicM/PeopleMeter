@@ -13,6 +13,8 @@ import hr.zavrsni.peoplemeter.R;
 import hr.zavrsni.peoplemeter.adapters.ChannelListAdapter;
 import hr.zavrsni.peoplemeter.adapters.IChannelListAdapter;
 import hr.zavrsni.peoplemeter.models.Channel;
+import hr.zavrsni.peoplemeter.services.ChannelService;
+import hr.zavrsni.peoplemeter.utils.volley.VolleyResponseListener;
 
 public class ChannelListActivity extends AppCompatActivity implements IChannelListAdapter {
 
@@ -27,21 +29,17 @@ public class ChannelListActivity extends AppCompatActivity implements IChannelLi
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(channelListAdapter);
 
-        List<Channel> channelList = new ArrayList<>();
-
-        // temporary, call service here
-        Channel HRT1 = new Channel(0, "HRT 1", "");
-        Channel HRT2 = new Channel(1, "HRT 2", "");
-        Channel RTL = new Channel(2, "RTL", "");
-        Channel Nova = new Channel(3, "Nova", "");
-
-
-        channelList.add(HRT1);
-        channelList.add(HRT2);
-        channelList.add(RTL);
-        channelList.add(Nova);
-
+        final List<Channel> channelList = new ArrayList<>();
         channelListAdapter.setChannels(channelList);
+
+        ChannelService channelService = new ChannelService(this);
+        channelService.getAllChannels(new VolleyResponseListener<List<Channel>>() {
+            @Override
+            public void onResponse(List<Channel> response) {
+                channelList.addAll(response);
+                channelListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

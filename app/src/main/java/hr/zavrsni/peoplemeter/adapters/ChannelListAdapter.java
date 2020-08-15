@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -20,7 +22,7 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
     private LayoutInflater mLayoutInflater;
     private List<Channel> mChannels;
 
-    IChannelListAdapter listener;
+    private IChannelListAdapter listener;
 
     public ChannelListAdapter(Context context, IChannelListAdapter listener) {
         mLayoutInflater = LayoutInflater.from(context);
@@ -36,10 +38,10 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        // images need to be downloaded
-        final int imageResId = 0;
+        // images from db, channel logo?
+        final String imageUrl = "https://www.clipartkey.com/mpngs/m/75-752419_in-the-mean-time-watch-a-little-television.png";
         final String name = mChannels.get(position).getName();
-        viewHolder.setData(imageResId, name);
+        viewHolder.setData(imageUrl, name);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,9 +73,9 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
             mNameTextView = itemView.findViewById(R.id.name);
         }
 
-        private void setData(int imageResId, String name) {
-            //mImageView.setImageResource(imageResId);
+        private void setData(String imageUrl, String name) {
             mNameTextView.setText(name);
+            Picasso.get().load(imageUrl).into(mImageView);
         }
     }
 }

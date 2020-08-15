@@ -16,14 +16,14 @@
         android:textSize="48sp">
     </TextView>
         <EditText
-            android:id="@+id/editText_email"
+            android:id="@+id/editText_login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:autofillHints="email">
+            android:hint="@string/username"
+            android:autofillHints="username">
         </EditText>
         <EditText
+            android:id="@+id/editText_login_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/password"

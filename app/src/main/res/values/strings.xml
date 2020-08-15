@@ -17,4 +17,6 @@
     <string name="submit_comment">Submit comment</string>
     <string name="leave_a_comment">Leave a comment about what you are watching</string>
     <string name="type_a_comment">Type a comment…</string>
+    <string name="username">Username</string>
+    <string name="enter_cred_login">Please enter username and password</string>
 </resources>

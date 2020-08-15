@@ -41,7 +41,6 @@ public class ChannelService {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-
                         List<Channel> channels = Arrays.asList(new Gson().fromJson(response.toString(), Channel[].class));
                         listener.onResponse(channels);
                     }
