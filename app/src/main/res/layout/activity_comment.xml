@@ -8,6 +8,7 @@
     android:layout_margin="50dp"
     tools:context=".activities.MainActivity">
     <TextView
+        android:id="@+id/textView_comment_program"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/leave_a_comment"
@@ -16,13 +17,20 @@
         android:textSize="18sp">
     </TextView>
     <EditText
-        android:id="@+id/editText_comment"
+        android:id="@+id/editText_comment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:gravity="top"
+        android:inputType="text">
+    </EditText>
+    <EditText
+        android:id="@+id/editText_comment_description"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:hint="@string/type_a_comment"
         android:gravity="top"
-        android:inputType="text"
-        android:autofillHints="email">
+        android:hint="@string/type_a_comment"
+        android:inputType="text">
     </EditText>
     <Button
         android:id="@+id/button_submit_comment"

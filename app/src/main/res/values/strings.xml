@@ -15,8 +15,10 @@
     <string name="logo">Logo</string>
     <string name="title_activity_channel_list">ChannelListActivity</string>
     <string name="submit_comment">Submit comment</string>
-    <string name="leave_a_comment">Leave a comment about what you are watching</string>
+    <string name="leave_a_comment">Leave a comment about </string>
     <string name="type_a_comment">Type a comment…</string>
     <string name="username">Username</string>
     <string name="enter_cred_login">Please enter username and password</string>
+    <string name="feedback_success">Feedback submitted succesfully!</string>
+    <string name="title">Title</string>
 </resources>

@@ -17,6 +17,11 @@ public class Feedback implements Serializable {
         this.program = program;
     }
 
+    public Feedback(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }
