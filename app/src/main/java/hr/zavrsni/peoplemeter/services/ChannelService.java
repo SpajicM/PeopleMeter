@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import hr.zavrsni.peoplemeter.models.Channel;
+import hr.zavrsni.peoplemeter.utils.GsonSingleton;
 import hr.zavrsni.peoplemeter.utils.Urls;
 import hr.zavrsni.peoplemeter.utils.volley.VolleyResponseListener;
 import hr.zavrsni.peoplemeter.utils.volley.VolleyUtils;
@@ -30,7 +31,7 @@ public class ChannelService {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Channel channel = new Gson().fromJson(response.toString(), Channel.class);
+                        Channel channel = GsonSingleton.getInstance().getGson().fromJson(response.toString(), Channel.class);
                         listener.onResponse(channel);
                     }
                 });
@@ -41,7 +42,18 @@ public class ChannelService {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        List<Channel> channels = Arrays.asList(new Gson().fromJson(response.toString(), Channel[].class));
+                        List<Channel> channels = Arrays.asList(GsonSingleton.getInstance().getGson().fromJson(response.toString(), Channel[].class));
+                        listener.onResponse(channels);
+                    }
+                });
+    }
+
+    public void getChannelsToday(final VolleyResponseListener<List<Channel>> listener) {
+        volley.requestArray(Request.Method.GET, Urls.TODAY_URL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<Channel> channels = Arrays.asList(GsonSingleton.getInstance().getGson().fromJson(response.toString(), Channel[].class));
                         listener.onResponse(channels);
                     }
                 });

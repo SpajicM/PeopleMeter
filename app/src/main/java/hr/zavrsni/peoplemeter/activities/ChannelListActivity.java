@@ -18,6 +18,8 @@ import hr.zavrsni.peoplemeter.utils.volley.VolleyResponseListener;
 
 public class ChannelListActivity extends AppCompatActivity implements IChannelListAdapter {
 
+    final List<Channel> channelList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +31,10 @@ public class ChannelListActivity extends AppCompatActivity implements IChannelLi
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(channelListAdapter);
 
-        final List<Channel> channelList = new ArrayList<>();
         channelListAdapter.setChannels(channelList);
 
         ChannelService channelService = new ChannelService(this);
-        channelService.getAllChannels(new VolleyResponseListener<List<Channel>>() {
+        channelService.getChannelsToday(new VolleyResponseListener<List<Channel>>() {
             @Override
             public void onResponse(List<Channel> response) {
                 channelList.addAll(response);
@@ -44,8 +45,8 @@ public class ChannelListActivity extends AppCompatActivity implements IChannelLi
 
     @Override
     public void onChannelClicked(int position) {
-        // TODO: pass id or position with intent
-        Intent intent = new Intent(this, CommentActivity.class);
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        intent.putExtra(ScheduleActivity.KEY_BUNDLE_CHANNEL, channelList.get(position));
         startActivity(intent);
 
     }

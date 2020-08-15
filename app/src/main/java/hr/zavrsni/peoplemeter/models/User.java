@@ -1,6 +1,8 @@
 package hr.zavrsni.peoplemeter.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     public User(String username, String password) {
         Username = username;
         Password = password;
