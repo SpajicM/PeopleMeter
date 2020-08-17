@@ -2,6 +2,7 @@ package hr.zavrsni.peoplemeter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class ChannelListActivity extends AppCompatActivity implements IChannelLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel_list);
 
+        final View progressOverlay = findViewById(R.id.progress_overlay);
+        progressOverlay.setVisibility(View.VISIBLE);
 
         final ChannelListAdapter channelListAdapter = new ChannelListAdapter(this, this);
         final RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -39,6 +42,7 @@ public class ChannelListActivity extends AppCompatActivity implements IChannelLi
             public void onResponse(List<Channel> response) {
                 channelList.addAll(response);
                 channelListAdapter.notifyDataSetChanged();
+                progressOverlay.setVisibility(View.GONE);
             }
         });
     }
