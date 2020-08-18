@@ -44,4 +44,15 @@ public class UserService {
                     }
                 });
     }
+
+    public void login(User user, final VolleyResponseListener<User> listener) {
+        volley.requestObject(Request.Method.POST, Urls.LOGIN_URL, user,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        User userResponse = GsonSingleton.getInstance().getGson().fromJson(response.toString(), User.class);
+                        listener.onResponse(userResponse);
+                    }
+                });
+    }
 }

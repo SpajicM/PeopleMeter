@@ -5,6 +5,7 @@ import hr.zavrsni.peoplemeter.R;
 import hr.zavrsni.peoplemeter.models.User;
 import hr.zavrsni.peoplemeter.services.UserService;
 import hr.zavrsni.peoplemeter.utils.Auth;
+import hr.zavrsni.peoplemeter.utils.volley.VolleyResponseListener;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,12 +38,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, getString(R.string.enter_cred_login), Toast.LENGTH_LONG).show();
 
                 User user = new User(username, password);
-                Auth.setUser(user);
+                new UserService(MainActivity.this).login(user, new VolleyResponseListener<User>() {
+                            @Override
+                            public void onResponse(User response) {
+                                Auth.setUser(response);
 
-                Intent intent = new Intent(MainActivity.this, ChannelListActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-
+                                Intent intent = new Intent(MainActivity.this, ChannelListActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        });
             }
         });
 

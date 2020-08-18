@@ -1,9 +1,9 @@
 package hr.zavrsni.peoplemeter.models;
 
 public class ChosenSchedule {
-    private int ScheduleId;
+    private int scheduleId;
 
     public ChosenSchedule(int scheduleId) {
-        ScheduleId = scheduleId;
+        this.scheduleId = scheduleId;
     }
 }

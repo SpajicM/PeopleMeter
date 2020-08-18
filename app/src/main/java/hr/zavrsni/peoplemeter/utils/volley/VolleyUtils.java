@@ -154,7 +154,7 @@ public class VolleyUtils {
                 Toast.makeText(mContext, "Connection timed out", Toast.LENGTH_LONG).show();
             } else if (error instanceof AuthFailureError) {
                 // Error indicating that there was an Authentication Failure while performing the request
-                Toast.makeText(mContext, "You are not authenticated", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Login failed", Toast.LENGTH_LONG).show();
             } else if (error instanceof ServerError) {
                 //Indicates that the server responded with a error response
                 Toast.makeText(mContext, "Server error", Toast.LENGTH_LONG).show();

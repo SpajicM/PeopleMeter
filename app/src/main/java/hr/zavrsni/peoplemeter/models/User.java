@@ -4,76 +4,76 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     public User(String username, String password) {
-        Username = username;
-        Password = password;
+        this.username = username;
+        this.password = password;
     }
 
     public User(String name, String surname, String password, String username, String email, String phoneNumber) {
-        Name = name;
-        Surname = surname;
-        Password = password;
-        Username = username;
-        Email = email;
-        PhoneNumber = phoneNumber;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
-    private String Name;
+    private String name;
 
-    private String Surname;
+    private String surname;
 
-    private String Password;
+    private String password;
 
-    private String Username;
+    private String username;
 
-    private String Email;
+    private String email;
 
-    private String PhoneNumber;
+    private String phoneNumber;
 }
