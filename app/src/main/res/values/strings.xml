@@ -21,4 +21,7 @@
     <string name="enter_cred_login">Please enter username and password</string>
     <string name="feedback_success">Feedback submitted succesfully!</string>
     <string name="title">Title</string>
+    <string name="added_to_watchlist">Added to watchlist!</string>
+    <string name="reminder_set">Reminder set</string>
+    <string name="something_went_wrong">Something went wrong!</string>
 </resources>

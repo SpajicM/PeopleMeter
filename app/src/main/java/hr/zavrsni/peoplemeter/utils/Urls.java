@@ -8,4 +8,6 @@ public class Urls {
     public static String TODAY_URL = BASE_URL + "/schedules/today";
     public static String REGISTER_URL = BASE_URL + "/authentication/register";
     public static String ACTIVATION_URL = BASE_URL + "/authentication/enterActivationCode";
+    public static String WATCHLIST_URL = BASE_URL + "/personalwatchlist";
+    public static String REMINDER_URL = BASE_URL + "/personalreminderlist";
 }

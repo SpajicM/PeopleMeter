@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -66,7 +67,7 @@ public class VolleyUtils {
     }
 
     public void requestArray(int method, String path, Object jsonRequest, Response.Listener<JSONArray> listener) {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(method, path,null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(method, path, null,
                 listener, errorListener) {
             @Override
             public Map<String, String> getHeaders() {
@@ -85,8 +86,37 @@ public class VolleyUtils {
                 }
             }
         };
-
         VolleySingleton.getInstance(mContext).addToRequestQueue(jsonArrayRequest);
+    }
+
+        public void requestString(int method, String path, final Object jsonRequest, Response.Listener<String> listener) {
+            StringRequest stringRequest = new StringRequest(method, path,
+                    listener, errorListener) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    return buildAuthHeaders();
+                }
+                public byte[] getBody() {
+                    return toJson(jsonRequest).toString().getBytes();
+                }
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    try {
+                        String jsonString = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers));
+                        return Response.success(jsonString, HttpHeaderParser.parseCacheHeaders(response));
+                    } catch (UnsupportedEncodingException e) {
+                        return Response.error(new ParseError(e));
+                    }
+                }
+            };
+
+
+            VolleySingleton.getInstance(mContext).addToRequestQueue(stringRequest);
     }
 
     private JSONObject toJson(Object object) {
